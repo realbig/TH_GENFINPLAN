@@ -1,0 +1,365 @@
+/*
+Theme Name:     CHILDgenfinplan-resort
+Description:    Child theme of Resort by WooThemes. Responsive theme with portfolio.
+Author:         Kyle
+Template:       resort
+*/
+@import url("../resort/style.css");
+
+#wrapper #header {
+    padding: 0;
+    margin: 0;
+    height: 180px;
+    z-index: 500;
+}
+
+#wrapper .top-login a {
+    position: absolute;
+    padding: 5px;
+    background-color: #521414;
+    right: 0;
+}
+
+#wrapper .top-login {
+    z-index: 99;
+    position: relative;
+    padding: 10px 0 0 0 !important;
+    margin: 0 !important;
+}
+
+#header #fixed-header.fixed a#logo {
+    margin-top: 0;
+}
+
+header #navigation {
+    margin: 0;
+}
+
+#header .login-contact {
+    min-height: 32px;
+    float: right;
+}
+
+#header .login-contact a.woo-sc-button {
+    border-radius: 0 0 0.4em 0.4em;
+    -webkit-border-radius: 0 0 0.4em 0.4em;
+    float: left !important;
+    position: static !important;
+    margin: 0 0 0 10px !important;
+}
+
+#header .login-contact #header-contact {
+    float: left;
+    text-align: center;
+}
+
+#header-contact ul.nav {
+    list-style: none;
+}
+
+#header-contact ul.nav li {
+    display: inline-block;
+}
+
+#header-contact ul.nav li.phone {
+    color: #fff;
+    background: url('../resort/images/ico-phone.png') no-repeat left center;
+    padding: 0 0 0 1.8em;
+}
+
+#header .login-contact #header-contact ul.nav li.phone span {
+    display: none;
+    font-size: .618em;
+    line-height: 1.9;
+    color: #D7D7D7;
+}
+
+#header-contact {
+    position: relative;
+    top: 0;
+}
+
+#header .login-contact #header-contact ul.nav li.phone {
+    line-height: 1em;
+}
+
+#header-contact ul.nav li.phone span {
+    display: block;
+}
+
+#header #navigation ul.nav > li.current_page_item .sub-menu a {
+    color: #FFF;
+}
+
+#header #navigation ul.nav > li.current_page_parent > a {
+    color: #43a1d6;
+}
+
+/* Slider */
+#wrapper .slide-content .woo-sc-button.green {
+    width: 100%;
+    margin: 0;
+}
+
+#wrapper .slide-content .woo-sc-button.green span {
+    font-size: 1.2em;
+}
+
+p.slide-stuff {
+    margin: 0;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+p.slide-stuff-sub {
+    font-size: 0.95em;
+}
+
+#wrapper #featured-slider .flex-direction-nav a.flex-prev {
+    left: 0em;
+}
+
+#wrapper #featured-slider .flex-direction-nav a.flex-next {
+    right: 0em;
+}
+
+#wrapper #featured-slider ul.slides li .slide-content {
+    right: 35px;
+    width: 28em;
+}
+
+@media only screen and (max-width: 1000px) {
+    #wrapper #featured-slider .flex-direction-nav {
+        display: none;
+    }
+
+    #wrapper #featured-slider ul.slides li .slide-content {
+        width: 100%;
+        float: none !important;
+        display: block !important;
+        position: static !important;
+        text-align: center;
+    }
+    #wrapper #featured-slider ul.slides li .slide-media {
+        width: 100%;
+        float: none !important;
+        display: block !important;
+        position: static !important;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #wrapper .slide-content .green.woo-sc-button span {
+        font-size: 0.9em;
+    }
+}
+
+/* Gravity Forms */
+.gform_wrapper input.button {
+    background-color: #8dc11e;
+    border-color: #87bf00;
+    width: 100%;
+}
+
+.gform_wrapper input.button:hover {
+    background-color: #709b15;
+}
+
+.gform_widget .gform_wrapper .top_label input.medium {
+    width: 98%;
+}
+
+.ginput_container, .gfield, .ginput_container .ginput_left {
+    margin-bottom: 0;
+}
+
+/* Widgets */
+.staff-menu ul {
+    margin: 0;
+    font-size: 2em;
+}
+
+.fa:before {
+    font-family: 'FontAwesome';
+    font-weight: lighter;
+    padding: 0 5px 0 0;
+}
+
+.fa-linkedin:before {
+    content: "\f08c";
+}
+
+.fa-twitter:before {
+    content: "\f099";
+}
+
+.fa-envelope:before {
+    content: "\f0e0";
+}
+
+.feature .feature-title a:hover {
+    text-decoration: none;
+}
+
+.feature .feature-title a:before, #featured-slider .flex-direction-nav li:before, #featured-slider .flex-direction-nav li:after {
+    font-family: 'FontAwesome';
+    display: block;
+    font-size: 4em;
+    text-align: center;
+    line-height: 0.9em;
+}
+
+.feature .feature-title a[title~=Wealth]:before, .fa-wealth:before {
+    content: "\f0d6";
+}
+
+.feature .feature-title a[title~=Team]:before, .fa-team:before {
+    content: "\f0c0";
+}
+
+.feature .feature-title a[title~=Discovery]:before, .fa-search:before {
+    content: "\f002";
+}
+
+.feature .feature-title a[title~=Touch]:before, .fa-touch:before {
+    content: "\f095";
+}
+
+.feature .feature-title a[title~=Guidance]:before, .fa-guidance:before {
+    content: "\f018";
+}
+
+.feature .feature-title a[title~=Advise]:before, .fa-advise:before {
+    content: "\f080";
+}
+
+.widget_woothemes_features .feature h3 {
+    text-align: center;
+}
+
+.mr_social_sharing_wrapper {
+    text-align: center;
+}
+
+/* Slider stuff */
+#featured-slider .flex-direction-nav li:before {
+    content: "\f053";
+    left: 5px;
+}
+
+#featured-slider .flex-direction-nav li:after {
+    content: "\f054";
+    right: 5px;
+}
+
+#featured-slider .flex-direction-nav li:after, #featured-slider .flex-direction-nav li:before {
+    position: absolute;
+    top: 50%;
+    color: #43a1d6;
+}
+
+.flex-direction-nav a {
+    background: none;
+}
+
+/* Anchors (offset from sticky header) */
+.anchor {
+    display: block;
+    position: relative;
+    top: -150px;
+    visibility: hidden;
+}
+
+/* Footer */
+.align-right {
+    float: right;
+}
+
+#footer-wrapper #footer-widgets.col-2 .footer-widget-1 {
+    width: 70%;
+    margin: 0 60px 0 0;
+}
+
+#footer-wrapper #footer-widgets.col-2 .footer-widget-2 {
+    width: 21%;
+}
+
+/* Color changes */
+a, #header #navigation ul.nav > li.current_page_item a {
+    color: #43a1d6;
+}
+
+a:hover {
+    color: #8dc11e;
+}
+
+#intro-message .right-section .button, #wrapper .woo-sc-button.aqua {
+    background: #43a1d6;
+}
+
+#intro-message .right-section a.button:hover, #wrapper a.woo-sc-button.aqua:hover {
+    background: #8dc11e;
+    color: #FFF;
+}
+
+/* Random adjustments */
+#wrapper .post-15 .woo-sc-button {
+    width: 150px;
+}
+
+#intro-message .left-section img {
+    float: left;
+    padding: 0 20px 0 0;
+}
+
+#intro-message .left-section {
+    width: 75%;
+}
+#intro-message .left-section p {
+    overflow: hidden;
+}
+
+#intro-message .right-section {
+    width: 25%;
+}
+
+.nav .phone * {
+    white-space: nowrap !important;
+    background: none !important;
+    color: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: static !important;
+}
+
+#logo-mobile {
+    display: none;
+    float: left;
+    max-width: 80%;
+}
+
+#navigation ul.nav ul li a {
+    font-size: 13px;
+}
+
+@media only screen and (max-width: 430px) {
+    #logo-mobile {
+        display: block;
+    }
+    #logo {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 769px) {
+    #intro-message .left-section {
+        width: 100%;
+    }
+    #intro-message .right-section {
+        width: 100%;
+        text-align: center;
+    }
+    #footer-widgets .block {
+        width: 100% !important;
+    }
+}
