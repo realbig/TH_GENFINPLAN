@@ -176,4 +176,144 @@ function genfinplan_customize_register( $wp_customize ) {
 
 }
 
-?>
+add_action( 'init', 'genfinplan_remove_contact_editor' );
+function genfinplan_remove_contact_editor() {
+    
+    if ( is_admin() && isset( $_REQUEST['post'] ) && ( 'template-contact.php' == get_post_meta( $_REQUEST['post'], '_wp_page_template', true ) ) ) {
+        remove_post_type_support( 'page', 'editor' );
+    }
+    
+}
+
+add_action( 'add_meta_boxes', 'genfinplan_add_contact_metaboxes' );
+function genfinplan_add_contact_metaboxes() {
+    
+    global $post;
+    if ( 'template-contact.php' == get_post_meta( $post->ID, '_wp_page_template', true ) ) {
+    
+        add_meta_box(
+            'genfinplan-contact-left',
+            __( 'Contact - Left', 'genfinplan' ),
+            'genfinplan_contact_left',
+            'page',
+            'normal',
+            'high'
+        );
+        
+        add_meta_box(
+            'genfinplan-contact-right',
+            __( 'Contact - Right', 'genfinplan' ),
+            'genfinplan_contact_right',
+            'page',
+            'normal',
+            'high'
+        );
+        
+        add_meta_box(
+            'genfinplan-contact-below',
+            __( 'Contact - Below', 'genfinplan' ),
+            'genfinplan_contact_below',
+            'page',
+            'normal',
+            'high'
+        );
+        
+    }
+
+}
+
+function genfinplan_contact_left() {
+    genfinplan_create_contact_meta( 'left' );
+}
+
+function genfinplan_contact_right() {
+    genfinplan_create_contact_meta( 'right' );
+}
+
+function genfinplan_create_contact_meta( $key ) {
+    
+    $slider_query = get_posts( array(
+        'post_type' => 'soliloquy',
+        'posts_per_page' => -1,
+    ) );
+    
+    $sliders = wp_list_pluck( $slider_query, 'post_title', 'ID' );
+    
+    rbm_do_field_select(
+        'contact_' . $key . '_slider',
+        __( 'Slider', 'genfinplan' ),
+        false,
+        array(
+            'options' => $sliders,
+        )
+    );
+    
+    rbm_do_field_text(
+        'contact_' . $key . '_title',
+        __( 'Location Name', 'genfinplan' ),
+        false,
+        array(
+        )
+    );
+    
+    rbm_do_field_text(
+        'contact_' . $key . '_street_address',
+        __( 'Street Address', 'genfinplan' ),
+        false,
+        array(
+        )
+    );
+    
+    rbm_do_field_text(
+        'contact_' . $key . '_city',
+        __( 'City', 'genfinplan' ),
+        false,
+        array(
+        )
+    );
+    
+    rbm_do_field_text(
+        'contact_' . $key . '_state',
+        __( 'State', 'genfinplan' ),
+        false,
+        array(
+        )
+    );
+    
+    rbm_do_field_text(
+        'contact_' . $key . '_zip',
+        __( 'ZIP Code', 'genfinplan' ),
+        false,
+        array(
+        )
+    );
+    
+    rbm_do_field_text(
+        'contact_' . $key . '_phone',
+        __( 'Phone Number', 'genfinplan' ),
+        false,
+        array(
+        )
+    );
+    
+    rbm_do_field_text(
+        'contact_' . $key . '_fax',
+        __( 'Fax Number', 'genfinplan' ),
+        false,
+        array(
+        )
+    );
+    
+}
+
+function genfinplan_contact_below() {
+    
+    rbm_do_field_wysiwyg(
+        'contact_content',
+        __( 'Content', 'Home About Content', 'genfinplan' ),
+        false,
+        array(
+        )
+    );
+    
+}

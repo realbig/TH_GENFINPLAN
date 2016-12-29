@@ -397,3 +397,7 @@ a:hover {
     }
     
 }
+
+.col-half {
+    width: 50%;
+}
