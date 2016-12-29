@@ -68,6 +68,12 @@ get_header();
                                     </div>
 
                                 </div><!-- /.location-twitter -->
+                                
+                                <?php echo do_shortcode( '[hr]' ); ?>
+                                
+                                <div class="col-full contact-below">
+                                    <?php echo apply_filters( 'the_content', rbm_get_field( 'contact_content' ) ); ?>
+                                </div>
 
                             </section>
 
