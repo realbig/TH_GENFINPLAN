@@ -402,6 +402,14 @@ a:hover {
     width: 50%;
 }
 
+@media screen and (max-width: 639px) {
+    
+    .col-half {
+        width: 100%;
+    }
+    
+}
+
 #contact-page .contact-below iframe {
     
     width: 100%;
