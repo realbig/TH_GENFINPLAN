@@ -363,3 +363,37 @@ a:hover {
         width: 100% !important;
     }
 }
+
+#header .login-contact a.woo-sc-button {
+    position: fixed !important;
+    top: 0;
+}
+    
+@media screen and (max-width: 639px) {
+    
+    #header #header-contact .nav {
+        text-align: left;
+    }
+    
+    #header #header-contact .phone {
+        max-width: 60%;
+    }
+    
+}
+
+@media screen and (max-width: 361px) {
+       
+    #header #header-contact .phone {
+        max-width: 57% !important;
+    }
+    
+}
+
+/* iPad fix */
+@media screen and (min-width: 640px) and (max-width: 1024px) {
+    
+    #header .login-contact {
+        float: none;
+    }
+    
+}
