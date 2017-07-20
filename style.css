@@ -6,6 +6,10 @@ Template:       resort
 */
 @import url("../resort/style.css");
 
+a {
+    text-decoration: underline;
+}
+
 #wrapper #header {
     padding: 0;
     margin: 0;
