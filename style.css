@@ -10,6 +10,10 @@ a {
     text-decoration: underline;
 }
 
+.features .feature {
+    box-sizing: border-box;
+}
+
 #wrapper #header {
     padding: 0;
     margin: 0;
