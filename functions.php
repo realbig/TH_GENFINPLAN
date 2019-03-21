@@ -317,3 +317,137 @@ function genfinplan_contact_below() {
     );
     
 }
+
+/**
+ * PHP 7.x compatibility fix. Just swapped out mysql_real_escape_string() for esc_sql()
+ */
+function woothemes_add_admin() {
+
+	global $query_string;
+	global $current_user;
+	$current_user_id = $current_user->user_login;
+	$super_user = get_option( 'framework_woo_super_user' );
+
+	$themename =  get_option( 'woo_themename' );
+	$shortname =  get_option( 'woo_shortname' );
+
+	// Reset the settings, sanitizing the various requests made.
+	// Use a SWITCH to determine which settings to update.
+
+	/* Make sure we're making a request.
+------------------------------------------------------------*/
+
+	if ( isset( $_REQUEST['page'] ) ) {
+
+		// Sanitize page being requested.
+		$_page = '';
+
+		$_page = esc_sql( strtolower( trim( strip_tags( $_REQUEST['page'] ) ) ) );
+
+		// Sanitize action being requested.
+		$_action = '';
+
+		if ( isset( $_REQUEST['woo_save'] ) ) {
+
+			$_action = esc_sql( strtolower( trim( strip_tags( $_REQUEST['woo_save'] ) ) ) );
+
+		} // End IF Statement
+
+		// If the action is "reset", run the SWITCH.
+
+		/* Perform settings reset.
+	------------------------------------------------------------*/
+
+		if ( $_action == 'reset' ) {
+
+			// Add nonce security check.
+			if ( function_exists( 'check_ajax_referer' ) ) {
+				if ( $_page == 'woothemes_seo' ) {
+					check_ajax_referer( 'wooframework-seo-options-reset', '_ajax_nonce' );
+				} else {
+					check_ajax_referer( 'wooframework-theme-options-reset', '_ajax_nonce' );
+				}
+			} // End IF Statement
+
+			switch ( $_page ) {
+
+			case 'woothemes':
+
+				$options =  get_option( 'woo_template' );
+				woo_reset_options( $options, 'woothemes' );
+				header( "Location: admin.php?page=woothemes&reset=true" );
+				die;
+
+				break;
+
+			case 'woothemes_framework_settings':
+
+				$options = get_option( 'woo_framework_template' );
+				woo_reset_options( $options );
+				header( "Location: admin.php?page=woothemes_framework_settings&reset=true" );
+				die;
+
+				break;
+
+			case 'woothemes_seo':
+
+				$options = get_option( 'woo_seo_template' );
+				woo_reset_options( $options );
+				header( "Location: admin.php?page=woothemes_seo&reset=true" );
+				die;
+
+				break;
+
+			case 'woothemes_sbm':
+
+				delete_option( 'sbm_woo_sbm_options' );
+				header( "Location: admin.php?page=woothemes_sbm&reset=true" );
+				die;
+
+				break;
+
+			} // End SWITCH Statement
+
+		} // End IF Statement
+
+	} // End IF Statement
+
+	// Check all the Options, then if the no options are created for a relative sub-page... it's not created.
+	if( get_option( 'framework_woo_backend_icon' ) ) { $icon = get_option( 'framework_woo_backend_icon' ); }
+	else { $icon = get_template_directory_uri() . '/functions/images/woo-icon.png'; }
+
+	if( function_exists( 'add_object_page' ) ) {
+		add_object_page ( 'Page Title', $themename, 'manage_options', 'woothemes', 'woothemes_options_page', $icon );
+	} else {
+		add_menu_page ( 'Page Title', $themename, 'manage_options', 'woothemes_home', 'woothemes_options_page', $icon );
+	}
+	$woopage = add_submenu_page( 'woothemes', $themename, __( 'Theme Options', 'woothemes' ), 'manage_options', 'woothemes', 'woothemes_options_page' ); // Default
+
+	// Framework Settings Menu Item
+	$wooframeworksettings = '';
+	if( $super_user == $current_user_id || empty( $super_user ) ) {
+		$wooframeworksettings = add_submenu_page( 'woothemes', __( 'Framework Settings', 'woothemes' ), __( 'Framework Settings', 'woothemes' ), 'manage_options', 'woothemes_framework_settings', 'woothemes_framework_settings_page' );
+	}
+
+	// Woothemes Content Builder
+	if ( function_exists( 'woothemes_content_builder_menu' ) ) {
+		woothemes_content_builder_menu();
+	}
+
+	// Update Framework Menu Item
+	if( $super_user == $current_user_id || empty( $super_user ) ) {
+		$woothemepage = add_submenu_page( 'woothemes', 'WooFramework Update', 'Update Framework', 'manage_options', 'woothemes_framework_update', 'woothemes_framework_update_page' );
+	}
+
+	// Add framework functionaily to the head individually
+	add_action( "admin_print_scripts-$woopage", 'woo_load_only' );
+	add_action( "admin_print_scripts-$wooframeworksettings", 'woo_load_only' );
+
+	// Load Framework CSS Files
+	add_action( "admin_print_styles-$woopage", 'woo_framework_load_css' );
+	add_action( "admin_print_styles-$wooframeworksettings", 'woo_framework_load_css' );
+
+	// Add the non-JavaScript "save" to the load of each of the screens.
+	add_action( "load-$woopage", 'woo_nonajax_callback' );
+	add_action( "load-$wooframeworksettings", 'woo_nonajax_callback' );
+}
